@@ -37,11 +37,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				</div>
 			</div>
 
-<!-- Footer -->
+<!-- Footer with adv code attached -->
 			<div id="footer"><?php echo $_smarty_tpl->tpl_vars['HOOK_FOOTER']->value;?>
 </div>
-		</div>
+	</div>
 	<?php }?>
 	</body>
+        <!--By Zhenodng Liu. Feb 2. Adding two Advertisements to the website.-->
+	<script type="text/javascript" src="/prestashop/js/sideBox.js"></script>
 </html>
 <?php }} ?>

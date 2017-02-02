@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Prestashop Adertisement System</title>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!--script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script-->
+      <!--script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script-->
+<!-- Latest compiled and minified CSS -->
+<!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" type="text/css" media="screen" />
+
+<link rel="stylesheet/less" href="http://jdewit.github.io/bootstrap-timepicker/css/timepicker.less">
+
+  </head>
+  <body>
+<div id="displayInfo" style="visibility:hidden;">Please login.</div>
+<div id="manageBox" style="visibility:hidden;">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Prestashop Advertisement System</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href='/prestashop/addAdv/management.html'>Publish</a></li>
+            <li class="active"><a>Statistics</a></li>
+            <li><a id ='welcomeID'>Hello! </a></li>
+            <li><a id ='logOut'> LogOut </a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+<div style="margin-top:80px; margin-left:80px; margin-right:80px;" id="statisticPanel" class="panel panel-success" >
+  <div class="panel-heading">
+    <h3 class="panel-title">Your Adv Statistic</h3>
+  </div>
+  <div id="StatisticPanelBody" class="panel-body" >
+<div class="row">
+<div class="col-lg-5 col-md-5 col-sm-5">
+<ul class="list-group">
+  <li id="slogan" class="list-group-item"> Slogan: </li>
+  <li id="name" class="list-group-item"> Name: </li>
+  <li id="address" class="list-group-item"> Address: </li>
+  <li id="image" class="list-group-item"> Back ground image: </li>
+  <li id="link" class="list-group-item"> Click then link to: </li>
+  <li id="showWhere" class="list-group-item"> Show AD at pages: </li>
+  <li id="showWho" class="list-group-item"> Show AD to users: </li>
+</ul>
+</div>
+<div class="col-lg-5 col-md-5 col-sm-5">
+<ul class="list-group">
+  <li class="list-group-item"> Price Per Click: 0.5$</li>
+  <li id="clickTimes" class="list-group-item"> Clicked times: </li>
+  <li id="viewTimes" class="list-group-item"> Viewed times: </li>
+  <li id="viewSeparateTimes" class="list-group-item"> Viewed Separate times: </li>
+  <li id="money" class="list-group-item"> Money left: </li>
+</ul>
+        <button id="delete" style="width: 150px; margin:40px 20px 100px 20px;" class="btn btn-sm btn-danger btn-block" type="delete">Delete My Ad.</button>
+</div>
+</div>
+  </div>
+</div>
+
+<div style="margin-top:30px; margin-left:80px; margin-right:80px;" id="previewPanel" class="panel panel-success" >
+  <div class="panel-heading">
+    <h3 class="panel-title">Adv View</h3>
+  </div>
+  <div id="previewPanelBody" class="panel-body" >
+  <div style="position: relavent; left:200px;"> <h4>Your adv will be previewed at here.</h4> </div>
+  </div>
+</div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script-->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<!-- Optional theme -->
+<!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"-->
+
+<!-- Latest compiled and minified JavaScript -->
+<!-- script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script-->
+
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js"></script>
+<script src="http://jdewit.github.io/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+</div> </body> <script>
+
+function setCookie(key, value) {
+    var expires = new Date();
+    expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
+    document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+}
+
+function getCookie(key) {
+    var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+    return keyValue ? keyValue[2] : null;
+}
+
+$(document).ready(function(){
+  if (getCookie('loginUsr').indexOf('@') > -1) {
+    document.getElementById("manageBox").style.visibility="visible";
+    document.getElementById("welcomeID").innerHTML="Hello!" + getCookie('loginUsr');
+  } else {
+    document.getElementById("manageBox").style.visibility="hidden";
+    document.getElementById("displayInfo").style.visibility="visible";
+  }
+  $("#logOut").click(function(){
+    setCookie('loginUsr', null);
+    document.location="/prestashop/addAdv/index.html";
+  });
+
+});
+
+$(document).ready(function(){
+  $('#delete').click(function(){
+    var r = confirm("Are you sure to delete your AD ?");
+    if (r == true) {
+      $.post("/prestashop/addAdv/adUpdate.php",{ command1:"delete", email1:getCookie('loginUsr')},function(data) {
+         if (data == 'Record deleted successfully') {
+           window.location = "/prestashop/addAdv/management.html";
+         } else {
+           alert(data);
+         }
+      });
+    } else {
+      // do nothing.
+    }
+});
+});
+
+$(document).ready(function(){
+  var slogan="";
+  var name="";
+  var address="";
+  var backgroundURL="";
+  var linkURL="";
+  var where = "+"; // home, itemInfo, usrInfo
+  var who = "+"; // unlogin, login
+  var adViewCount = "";
+  var adClickCount = "";
+  var adViewSeparateCount = ""; 
+  var budget = 0;
+  var showWhere = "";
+  var showWho = "";
+  
+
+$.post("/prestashop/addAdv/adContent.php",{ where1: where, who1: who},function(data) {
+if (data == "0 results") {
+  // for debug.
+  alert("Your haven't pubulished any AD yet.");
+  window.location = "/prestashop/addAdv/management.html";
+  return;
+} else {
+var items = data.split('|');   
+
+  slogan=items[0];
+  name=items[1];
+  address=items[2];
+  backgroundURL=items[3];
+  linkURL=items[4];
+  adViewCount=items[5]; 
+  adClickCount=parseFloat(items[6]);
+  adViewSeparateCount=1; // TODO:  should = items[7];  not implemented yet.
+  budget = parseFloat(items[8]);
+  showWhere = items[9];
+  showWho = items[10];	
+
+  if (backgroundURL.indexOf('https:') <= -1) backgroundURL = "https://" + backgroundURL;
+  if (linkURL.indexOf('https:') <= -1) linkURL = "https://" + linkURL;
+
+  document.getElementById('slogan').innerHTML += slogan;
+  document.getElementById('name').innerHTML += name;
+  document.getElementById('address').innerHTML += address;
+  document.getElementById('image').innerHTML += backgroundURL;
+  document.getElementById('link').innerHTML += linkURL;
+  document.getElementById('clickTimes').innerHTML += "" + adClickCount;
+  document.getElementById('viewTimes').innerHTML += adViewCount;
+  document.getElementById('viewSeparateTimes').innerHTML += adViewSeparateCount;
+  document.getElementById('money').innerHTML += "" + (budget - adClickCount * 0.5) + "$";
+  document.getElementById('showWhere').innerHTML += showWhere;
+  document.getElementById('showWho').innerHTML += showWho;
+
+  document.getElementById('previewPanelBody').innerHTML = '<div id="adleft" onclick=\"window.open(\''+linkURL+'\')\"; style="width:70px; height:100px; padding:5px; overflow: auto; text-overflow: ellipsis; arial; background-color:#06c; background-image:url(' + backgroundURL + '); background-size: 100% auto; position:relative; cursor:pointer; color:#000; left:0;"><div style="text-align:center;"><p style="font:10px/20px arial;">'+slogan+'</p></div><div style="position:absolute; bottom:10px;"><p style="font:6px/20px arial;">'+name+'<br />'+address+'</p></div></div>';
+  
+}
+});
+});
+
+</script>
+
+
+</html>

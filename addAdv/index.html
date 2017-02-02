@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Prestashop Adertisement System</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// --> <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  </head>
+  <body>
+
+     <div class="container">
+      <div class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <!--label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label-->
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="button" id="login">Sign in</button>
+      </div>
+
+    </div> <!-- /container -->
+<script>
+function setCookie(key, value) {
+    var expires = new Date();
+    expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
+    document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+}
+
+function getCookie(key) {
+    var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+    return keyValue ? keyValue[2] : null;
+}
+
+$(document).ready(function(){
+  $("#login").click(function(){
+    var email = $("#inputEmail").val();
+    var password = $("#inputPassword").val();
+    // Checking for blank fields.
+    if( email =='' || password ==''){
+      $('input[type="email"],input[type="password"]').css("border","2px solid red");
+      $('input[type="email"],input[type="password"]').css("box-shadow","0 0 3px red");
+      alert("Please fill all fields...!!!!!!");
+    } else {
+      $.post("/prestashop/addAdv/addAdvLogin.php", {email1: email, password1:password}, function(data) {
+        if(data=='Invalid Email.......') {
+          $('input[type="email"]').css({"border":"2px solid red","box-shadow":"0 0 3px red"});
+          $('input[type="password"]').css({"border":"2px solid #00F5FF","box-shadow":"0 0 5px #00F5FF"});
+          alert(data);
+        } else if (data=='Email or Password is wrong...!!!!'){
+          $('input[type="email"],input[type="password"]').css({"border":"2px solid red","box-shadow":"0 0 3px red"});
+          alert(data);
+        } else if(data=='Successfully Logged in...'){
+          setCookie("loginUsr", email);
+          window.location.href = "/prestashop/addAdv/management.html";
+          return false;
+        } else{
+          alert(data);
+        }
+        return false;
+      });
+    }
+  });
+});
+
+</script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>
+</html>
